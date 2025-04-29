@@ -15,13 +15,38 @@ This is a Node.js application built with Express.js. It includes MongoDB integra
 - [MongoDB](https://www.mongodb.com/)
 - Docker (optional, for containerization)
 
+### MongoDB Connection Configuration
+
+This application expects MongoDB credentials to be provided via a Kubernetes Secret.
+
+
+    # -- This section configures credentials for connecting to the MongoDB instance
+    # The secret field must be in the following format:
+    # <protocol (e.g., mongodb+srv)>://<login>:<password>@<host>/<databaseName>
+    mongoConnection:
+    existingSecret:
+        # -- The name of the secret that contains the connection string
+        name: mongoauth-test-admin
+        # -- The key in the secret that contains the connection string
+        key: connectionString.standardSrv
+
+
+Example command to create the Kubernetes Secret:
+
+
+    # The secret must be created in the same namespace as the application
+    kubectl create secret generic mongoauth-test-admin \
+    --namespace=<target_namespace_with_application> \
+    --from-literal=connectionString.standardSrv='<protocol>://<login>:<password>@<host>/<databaseName>'
+
+
 ## Installation
 
 1. Clone the repository:
 
    ```bash
-   git clone https://git.epam.com/Karthik_Lakshmanan/workaround.git
-   cd workaround
+   git clone https://github.com/Rolika4/node-backend
+   cd node-backend
 
 2. Install dependencies:
      ```bash
