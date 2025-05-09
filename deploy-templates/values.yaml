@@ -74,6 +74,10 @@ resources: {}
   #   cpu: 100m
   #   memory: 128Mi
 
+env:
+  -name: MONGO_URI
+  value: mongodb+srv://ProjectEducationTeam4:npKj6AyzbwBmDpvR@projecteducationteam4.lfrpba5.mongodb.net/ProjectEducationTeam4
+
 livenessProbe:
   tcpSocket:
     port: http
